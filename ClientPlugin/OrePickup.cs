@@ -26,8 +26,10 @@ namespace ClientPlugin
                 return;
 
             var character = MySession.Static.LocalCharacter;
-            if (character == null || character.Closed || !(character.CurrentWeapon is MyHandDrill drill) ||
-                drill.Closed || !drill.IsShooting || drill.HasInventory)
+            if (character == null || character.Closed ||
+                !(character.CurrentWeapon is MyHandDrill drill) ||
+                drill.Closed || drill.HasInventory ||
+                !drill.IsShooting || !drill.CollectingOre)
                 return;
 
             IMyHandDrill iDrill = drill;

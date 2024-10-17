@@ -6,6 +6,7 @@ Picks up ore extracted by the hand drill.
 
 - Works both in creative and survival
 - Works both in offline and online multiplayer worlds
+- Picks up ore only while collecting it (left mouse button)
 
 ## Prerequisites
 
@@ -15,7 +16,7 @@ Picks up ore extracted by the hand drill.
 ## Installation
 
 - Install Plugin Loader's [Space Engineers Launcher](https://github.com/sepluginloader/SpaceEngineersLauncher)
-- Add the "Simple Ore Pickup" plugin to your list of enabled plugins
+- Add the "Ore Pickup" plugin to your list of enabled plugins
 
 ## Configuration
 
@@ -43,9 +44,9 @@ stone   s
 
 ## Troubleshooting
 
-### Mod conflict
+### Conflicting mod
 
-Do not use this plugin together with this mod:
+Do not use this plugin together with this mod, because it has similar functionality:
 
 - [Automatic Ore Pickup](https://steamcommunity.com/sharedfiles/filedetails/?id=657749341)
 
