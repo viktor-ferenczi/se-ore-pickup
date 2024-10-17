@@ -16,3 +16,33 @@ Picks up ore extracted by the hand drill.
 
 - Install Plugin Loader's [Space Engineers Launcher](https://github.com/sepluginloader/SpaceEngineersLauncher)
 - Add the "Simple Ore Pickup" plugin to your list of enabled plugins
+
+## Configuration
+
+Going out to the plugin configuration would be slow for the players,
+therefore the runtime configuration is implemented via chat commands:
+
+```
+/pickup help    Prints this help on usage
+/pickup info    Prints the current settings
+/pickup on      Enables the plugin
+/pickup off     Disables the plugin
+/pickup ice     Toggles picking up ice
+/pickup stone   Toggles picking up stone
+```
+
+Shortcuts:
+```
+help    h
+info    ?
+on      1
+off     0
+ice     i
+stone   s
+```
+
+## Troubleshooting
+
+### Mod compatibility
+
+Do not use this plugin together with the [Automatic Ore Pickup](https://steamcommunity.com/sharedfiles/filedetails/?id=657749341) mod.
