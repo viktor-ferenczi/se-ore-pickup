@@ -1,22 +1,38 @@
 <?xml version="1.0"?>
 <PluginData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="GitHubPlugin">
-  <Id>TODO: github-user/project-name</Id>
-  <GroupId>TODO: github-user/project-name</GroupId>
-  <FriendlyName>TODO: OrePickup</FriendlyName>
-  <Author>TODO: Author Name</Author>
-  <Commit>TODO: Git commit hash</Commit>
+  <Id>viktor-ferenczi/se-ore-pickup</Id>
+  <GroupId>viktor-ferenczi/se-ore-pickup</GroupId>
+  <FriendlyName>Ore Pickup</FriendlyName>
+  <Author>Viktor</Author>
+  <Commit>c6b3b9698ae72def63361e34c73c783221088802</Commit>
   <SourceDirectories>
-    <Directory>ClientPlugin</Directory>
+    <Directory>OrePickup</Directory>
   </SourceDirectories>
-  <Tooltip>TODO: Short description</Tooltip>
-  <Description>TODO: Long description, multiple lines.
+  <Tooltip>Picks up ore extracted by the hand drill.</Tooltip>
+  <Description>Picks up ore extracted by the hand drill.
 
-FriendlyName: How your plugin will show up in the Plugins list.
+    Works both in creative and survival.
+    Works both in offline and online multiplayer worlds.
 
-This text is shown on the right side in the plugin details panel in a scrollable text box.
+    The plugin is configurable via chat commands:
+    /pickup help    Prints this help on usage
+    /pickup info    Prints the current settings
+    /pickup on      Enables the plugin
+    /pickup off     Disables the plugin
+    /pickup ice     Toggles picking up ice
+    /pickup stone   Toggles picking up stone
 
-You can use links here, players can click on them! For example add a Discord invite.
+    The plugin disables itself if a conflicting mod is detected.
 
-Don't touch the SourceDirectories, unless you rename or consolidate your projects inside the solution.
+    For support join the SE Mods Discord:
+    https://discord.gg/PYPFPGf3Ca
+
+    Please consider supporting my work on Patreon:
+    https://www.patreon.com/semods
+
+    One time support via PayPal:
+    https://www.paypal.com/paypalme/vferenczi/
+
+    Thank you!
   </Description>
 </PluginData>
