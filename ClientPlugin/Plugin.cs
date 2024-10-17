@@ -7,7 +7,7 @@ using VRage.Plugins;
 namespace ClientPlugin
 {
     // ReSharper disable once UnusedType.Global
-    public class Plugin : IPlugin, IDisposable
+    public class Plugin : IPlugin
     {
         public const string Name = "OrePickup";
         public static Plugin Instance { get; private set; }

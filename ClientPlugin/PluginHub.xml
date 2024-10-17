@@ -6,7 +6,7 @@
   <Author>Viktor</Author>
   <Commit>c6b3b9698ae72def63361e34c73c783221088802</Commit>
   <SourceDirectories>
-    <Directory>OrePickup</Directory>
+    <Directory>ClientPlugin</Directory>
   </SourceDirectories>
   <Tooltip>Picks up ore extracted by the hand drill.</Tooltip>
   <Description>Picks up ore extracted by the hand drill.
