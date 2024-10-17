@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using HarmonyLib;
 using Sandbox.Game.World;
 using VRage.Plugins;
@@ -34,7 +35,19 @@ namespace ClientPlugin
             Instance = null;
         }
 
+        private static readonly ulong[] IncompatibleMods = {
+            // Automatic Ore Pickup
+            // https://steamcommunity.com/sharedfiles/filedetails/?id=657749341
+            657749341UL,
+        };
+
         private void OnSessionLoading()
+        {
+            RegisterChatCommand();
+            EnableIfThereAreNoIncompatibleMods();
+        }
+
+        private static void RegisterChatCommand()
         {
             var chatCommands = MySession.Static.ChatSystem.CommandSystem.ChatCommands;
             var handler = new OrePickupChatCommand();
@@ -42,6 +55,21 @@ namespace ClientPlugin
             {
                 chatCommands.Add(handler.CommandText, handler);
             }
+        }
+
+        private static void EnableIfThereAreNoIncompatibleMods()
+        {
+            foreach (var mod in MySession.Static.Mods)
+            {
+                var workshopId = mod.GetWorkshopId().Id;
+                if (IncompatibleMods.Contains(workshopId))
+                {
+                    OrePickup.Enabled = false;
+                    return;
+                }
+            }
+
+            OrePickup.Enabled = true;
         }
 
         public void Update()

@@ -43,6 +43,11 @@ stone   s
 
 ## Troubleshooting
 
-### Mod compatibility
+### Mod conflict
 
-Do not use this plugin together with the [Automatic Ore Pickup](https://steamcommunity.com/sharedfiles/filedetails/?id=657749341) mod.
+Do not use this plugin together with this mod:
+
+- [Automatic Ore Pickup](https://steamcommunity.com/sharedfiles/filedetails/?id=657749341)
+
+On loading or joining a game the plugin disables itself if any
+conflicting mod is detected. Otherwise, the plugin enables itself.
