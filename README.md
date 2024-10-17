@@ -1,4 +1,4 @@
-# Simple Ore Pickup
+# Ore Pickup
 
 Plugin for the game Space Engineers.
 
