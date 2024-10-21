@@ -16,13 +16,55 @@ namespace ClientPlugin
     {
         private const float CollectionRange = 2.5f;
 
-        public static bool Enabled = true;
-        public static bool CollectIce = true;
-        public static bool CollectStone = true;
+        public static OrePickupConfig Config = new OrePickupConfig();
+        public static bool HasDetectedIncompatibleMod;
+        public static string IncompatibleModName;
+
+        public static void Init()
+        {
+            Config = OrePickupConfig.Load();
+        }
+
+        public static void OnSessionLoading()
+        {
+            CheckIncompatibleMods();
+        }
+
+        public static void OnSessionUnloading()
+        {
+            HasDetectedIncompatibleMod = false;
+        }
+
+        private static readonly Dictionary<ulong, string> IncompatibleMods = new Dictionary<ulong, string>
+        {
+            // Automatic Ore Pickup
+            // https://steamcommunity.com/sharedfiles/filedetails/?id=657749341
+            { 657749341UL, "Automatic Ore Pickup" },
+        };
+
+        private static void CheckIncompatibleMods()
+        {
+            foreach (var mod in MySession.Static.Mods)
+            {
+                var workshopId = mod.GetWorkshopId().Id;
+                if (IncompatibleMods.TryGetValue(workshopId, out var modName))
+                {
+                    HasDetectedIncompatibleMod = true;
+                    IncompatibleModName = modName;
+                    return;
+                }
+            }
+
+            HasDetectedIncompatibleMod = false;
+            IncompatibleModName = null;
+        }
 
         public static void CollectOre()
         {
-            if (!Enabled || MySession.Static == null || MySession.Static.IsUnloading)
+            if (!Config.Enabled ||
+                HasDetectedIncompatibleMod ||
+                MySession.Static == null ||
+                MySession.Static.IsUnloading)
                 return;
 
             var character = MySession.Static.LocalCharacter;
@@ -50,12 +92,12 @@ namespace ClientPlugin
                 switch (subtypeName)
                 {
                     case "Ice":
-                        if (!CollectIce)
+                        if (!Config.CollectIce)
                             continue;
                         break;
 
                     case "Stone":
-                        if (!CollectStone)
+                        if (!Config.CollectStone)
                             continue;
                         break;
                 }

@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Reflection;
+using System.Text;
+using ClientPlugin.GUI;
 using HarmonyLib;
 using Sandbox.Game.World;
+using Sandbox.Graphics.GUI;
+using Sandbox.ModAPI;
 using VRage.Plugins;
+using VRageMath;
 
 namespace ClientPlugin
 {
@@ -17,12 +22,15 @@ namespace ClientPlugin
         public void Init(object gameInstance)
         {
             Instance = this;
+            
+            OrePickup.Init();
 
             // TODO: Put your one time initialization code here.
             Harmony harmony = new Harmony(Name);
             harmony.PatchAll(Assembly.GetExecutingAssembly());
 
             MySession.OnLoading += OnSessionLoading;
+            MySession.OnUnloading += OnSessionUnloading;
         }
 
         public void Dispose()
@@ -35,16 +43,15 @@ namespace ClientPlugin
             Instance = null;
         }
 
-        private static readonly ulong[] IncompatibleMods = {
-            // Automatic Ore Pickup
-            // https://steamcommunity.com/sharedfiles/filedetails/?id=657749341
-            657749341UL,
-        };
-
         private void OnSessionLoading()
         {
             RegisterChatCommand();
-            EnableIfThereAreNoIncompatibleMods();
+            OrePickup.OnSessionLoading();
+        }
+
+        private void OnSessionUnloading()
+        {
+            OrePickup.OnSessionUnloading();
         }
 
         private static void RegisterChatCommand()
@@ -57,33 +64,28 @@ namespace ClientPlugin
             }
         }
 
-        private static void EnableIfThereAreNoIncompatibleMods()
-        {
-            foreach (var mod in MySession.Static.Mods)
-            {
-                var workshopId = mod.GetWorkshopId().Id;
-                if (IncompatibleMods.Contains(workshopId))
-                {
-                    OrePickup.Enabled = false;
-                    return;
-                }
-            }
-
-            OrePickup.Enabled = true;
-        }
-
         public void Update()
         {
             if (frameCounter++ % 6 == 0)
                 OrePickup.CollectOre();
         }
 
-        // TODO: Uncomment and use this method to create a plugin configuration dialog
         // ReSharper disable once UnusedMember.Global
-        /*public void OpenConfigDialog()
+        public void OpenConfigDialog()
         {
-            MyGuiSandbox.AddScreen(new MyPluginConfigDialog());
-        }*/
+            if (OrePickup.HasDetectedIncompatibleMod)
+            {
+                var messageBox = MyGuiSandbox.CreateMessageBox(
+                    MyMessageBoxStyleEnum.Info,
+                    messageText: new StringBuilder($"The Ore Pickup plugin has been disabled in this world\ndue to the presence of an incompatible mod:\n\n{OrePickup.IncompatibleModName}"),
+                    messageCaption: new StringBuilder("Ore Pickup"),
+                    size: new Vector2(0.65f, 0.35f));
+                MyGuiSandbox.AddScreen(messageBox);
+                return;
+            }
+
+            MyGuiSandbox.AddScreen(new PluginConfigDialog());
+        }
 
         //TODO: Uncomment and use this method to load asset files
         /*public void LoadAssets(string folder)
