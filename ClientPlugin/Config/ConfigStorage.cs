@@ -6,21 +6,16 @@ using VRage.Utils;
 
 namespace ClientPlugin
 {
-    public class OrePickupConfig
+    public static class ConfigStorage
     {
-        public bool Enabled = true;
-        public bool CollectIce = true;
-        public bool CollectStone = true;
-        
         private const string ConfigFileName = "OrePickup.ini";
         private static string ConfigFilePath => Path.Combine(MyFileSystem.UserDataPath, ConfigFileName);
-        private static OrePickupConfig Default => new OrePickupConfig();
 
-        public void Save()
+        public static void Save(OrePickupConfig config)
         {
             var path = ConfigFilePath;
             using (var text = File.CreateText(path))
-                new XmlSerializer(typeof(OrePickupConfig)).Serialize(text, this);
+                new XmlSerializer(typeof(OrePickupConfig)).Serialize(text, config);
         }
 
         public static OrePickupConfig Load()
@@ -28,21 +23,22 @@ namespace ClientPlugin
             var path = ConfigFilePath;
             if (!File.Exists(path))
             {
-                return Default;
+                return OrePickupConfig.Default;
             }
 
             var xmlSerializer = new XmlSerializer(typeof(OrePickupConfig));
             try
             {
                 using (var streamReader = File.OpenText(path))
-                    return (OrePickupConfig)xmlSerializer.Deserialize(streamReader) ?? Default;
+                    return (OrePickupConfig)xmlSerializer.Deserialize(streamReader) ?? OrePickupConfig.Default;
             }
             catch (Exception)
             {
                 MyLog.Default.Warning($"OrePickup: Failed to read config file: path");
             }
             
-            return Default;
+            return OrePickupConfig.Default;
         }
+        
     }
 }

@@ -490,10 +490,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\ConfigStorage.cs" />
+    <Compile Include="Config\OrePickupConfig.cs" />
+    <Compile Include="GUI\CheckboxAttribute.cs" />
     <Compile Include="GUI\PluginConfigDialog.cs" />
     <Compile Include="OrePickup.cs" />
     <Compile Include="OrePickupChatCommand.cs" />
-    <Compile Include="OrePickupConfig.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

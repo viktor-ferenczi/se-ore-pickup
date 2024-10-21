@@ -77,7 +77,7 @@ namespace ClientPlugin.GUI
 
         private void OnOk(MyGuiControlButton _)
         {
-            OrePickup.Config.Save();
+            ConfigStorage.Save(OrePickup.Config);
             CloseScreen();
         }
 

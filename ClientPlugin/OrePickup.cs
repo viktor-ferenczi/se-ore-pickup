@@ -22,7 +22,7 @@ namespace ClientPlugin
 
         public static void Init()
         {
-            Config = OrePickupConfig.Load();
+            Config = ConfigStorage.Load();
         }
 
         public static void OnSessionLoading()
