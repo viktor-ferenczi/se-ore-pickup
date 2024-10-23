@@ -4,6 +4,7 @@ using Sandbox.Graphics.GUI;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 
 namespace ClientPlugin.Settings
@@ -16,6 +17,19 @@ namespace ClientPlugin.Settings
         private List<List<MyGuiControlBase>> Controls;
         public Screen Dialog { get; private set; }
         public Layout ActiveLayout { get; private set; }
+
+        private static string UnCamelCase(string str)
+        {
+            return Regex.Replace(
+                Regex.Replace(
+                    str,
+                    @"(\P{Ll})(\P{Ll}\p{Ll})",
+                    "$1 $2"
+                ),
+                @"(\p{Ll})(\P{Ll})",
+                "$1 $2"
+            );
+        }
 
         public Generator()
         {
@@ -69,7 +83,7 @@ namespace ClientPlugin.Settings
                 {
                     if (attribute is IElement element)
                     {
-                        config.Add(Tuple.Create(element, name, (Func<object>)getter, (Action<object>)setter));
+                        config.Add(Tuple.Create(element, UnCamelCase(name), (Func<object>)getter, (Action<object>)setter));
                     }
                 }
             }

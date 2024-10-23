@@ -19,7 +19,7 @@ namespace ClientPlugin.Settings.Elements
             return new List<MyGuiControlBase>()
             {
                 new MyGuiControlLabel(text: name),
-                new MyGuiControlCheckbox()
+                new MyGuiControlCheckbox(toolTip: Description)
                 {
                     Size = new Vector2(0.5f, 0.5f),
                     IsChecked = (bool)propertyGetter(),

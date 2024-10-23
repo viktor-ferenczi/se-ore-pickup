@@ -2,6 +2,7 @@
 using Sandbox.Graphics.GUI;
 using System;
 using System.Collections.Generic;
+using System.Security;
 using VRageMath;
 
 namespace ClientPlugin.Settings
@@ -36,12 +37,13 @@ namespace ClientPlugin.Settings
             m_drawEvenWithoutFocus = true;
             CanHideOthers = true;
             CanBeHidden = true;
-            CloseButtonEnabled = false;
+            CloseButtonEnabled = true;
         }
 
         public void UpdateSize(Vector2 screenSize)
         {
             Size = screenSize;
+            CloseButtonEnabled = CloseButtonEnabled; // Force close button to update
         }
 
         public override void LoadContent()

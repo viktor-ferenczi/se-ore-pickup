@@ -11,7 +11,7 @@ namespace ClientPlugin.Settings.Layouts
         private MyGuiControlParent Parent;
         private MyGuiControlScrollablePanel ScrollPanel;
 
-        public override Vector2 ScreenSize => new Vector2(0.9f, 0.9f);
+        public override Vector2 ScreenSize => new Vector2(0.4f, 0.7f);
 
         private const float ElementHeight = 0.03f;
         private const float ElementPadding = 0.015f;
@@ -33,9 +33,9 @@ namespace ClientPlugin.Settings.Layouts
         {
             Parent = new MyGuiControlParent()
             {
-                OriginAlign = MyGuiDrawAlignEnum.HORISONTAL_CENTER_AND_VERTICAL_BOTTOM,
-                Position = new Vector2(0f, 0.5f * ScreenSize.Y),
-                Size = new Vector2(0.8f, 0.8f),
+                OriginAlign = MyGuiDrawAlignEnum.HORISONTAL_RIGHT_AND_VERTICAL_BOTTOM,
+                Position = 0.5f * ScreenSize,
+                Size = new Vector2(ScreenSize.X-0.01f, ScreenSize.Y-0.09f),
             };
 
             ScrollPanel = new MyGuiControlScrollablePanel(Parent)
@@ -43,9 +43,9 @@ namespace ClientPlugin.Settings.Layouts
                 BackgroundTexture = null,
                 BorderHighlightEnabled = false,
                 BorderEnabled = false,
-                OriginAlign = MyGuiDrawAlignEnum.HORISONTAL_CENTER_AND_VERTICAL_BOTTOM,
-                Position = new Vector2(0f, 0.5f * ScreenSize.Y),
-                Size = new Vector2(0.8f, 0.8f),
+                OriginAlign = MyGuiDrawAlignEnum.HORISONTAL_RIGHT_AND_VERTICAL_BOTTOM,
+                Position = 0.5f * ScreenSize,
+                Size = Parent.Size,
                 ScrollbarVEnabled = true,
                 CanFocusChildren = true,
                 ScrolledAreaPadding = new MyGuiBorderThickness(0.005f),
