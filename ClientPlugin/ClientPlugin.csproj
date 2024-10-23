@@ -490,8 +490,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Settings\Elements\Base.cs" />
+    <Compile Include="Settings\Elements\Element.cs" />
     <Compile Include="Settings\Generator.cs" />
+    <Compile Include="Settings\Layouts\Layout.cs" />
+    <Compile Include="Settings\Layouts\None.cs" />
+    <Compile Include="Settings\Layouts\Simple.cs" />
     <Compile Include="Settings\Screen.cs" />
     <Compile Include="Settings\Storage.cs" />
     <Compile Include="Settings\Config.cs" />

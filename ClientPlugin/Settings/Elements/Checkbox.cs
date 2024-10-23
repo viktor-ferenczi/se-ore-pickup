@@ -5,7 +5,7 @@ using VRageMath;
 
 namespace ClientPlugin.Settings.Elements
 {
-    class CheckboxAttribute : Attribute, IBase
+    class CheckboxAttribute : Attribute, IElement
     {
         public readonly string Description;
 

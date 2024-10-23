@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ClientPlugin.Settings.Elements
 {
-    internal interface IBase
+    internal interface IElement
     {
         List<MyGuiControlBase> GetElements(string name, Func<object> propertyGetter, Action<object> propertySetter);
     }

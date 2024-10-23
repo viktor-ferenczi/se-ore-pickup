@@ -9,7 +9,7 @@ namespace ClientPlugin.Settings
         public static readonly Config Current = Storage.Load();
 
         // Build your UI
-        public static readonly string Title = "Config";
+        public readonly string Title = "Config";
 
         [Checkbox("Enable plugin")]
         public bool Enabled { get; set; } = true;

@@ -1,4 +1,5 @@
 ﻿using ClientPlugin.Settings;
+using ClientPlugin.Settings.Layouts;
 using HarmonyLib;
 using Sandbox.Game.World;
 using Sandbox.Graphics.GUI;
@@ -21,7 +22,7 @@ namespace ClientPlugin
         public void Init(object gameInstance)
         {
             Instance = this;
-            Instance.ConfigGenerator = new Generator(typeof(Config));
+            Instance.ConfigGenerator = new Generator();
             
             // TODO: Put your one time initialization code here.
             Harmony harmony = new Harmony(Name);
@@ -71,9 +72,8 @@ namespace ClientPlugin
                 return;
             }
 
-            Instance.ConfigGenerator.CreateControls();
-            Instance.ConfigGenerator.LayoutControls(Layout.Simple);
-            MyGuiSandbox.AddScreen(Instance.ConfigGenerator.GetLayoutScreen());
+            Instance.ConfigGenerator.SetLayout<Simple>();
+            MyGuiSandbox.AddScreen(Instance.ConfigGenerator.Dialog);
         }
     }
 }

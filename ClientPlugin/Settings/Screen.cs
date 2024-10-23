@@ -36,12 +36,12 @@ namespace ClientPlugin.Settings
             m_drawEvenWithoutFocus = true;
             CanHideOthers = true;
             CanBeHidden = true;
-            CloseButtonEnabled = true;
+            CloseButtonEnabled = false;
         }
 
-        public void AddCaption(string caption)
+        public void UpdateSize(Vector2 screenSize)
         {
-            base.AddCaption(caption);
+            Size = screenSize;
         }
 
         public override void LoadContent()
@@ -59,6 +59,7 @@ namespace ClientPlugin.Settings
         public override void RecreateControls(bool constructor)
         {
             base.RecreateControls(constructor);
+            AddCaption(Name);
 
             foreach (var item in GetControls())
             {
