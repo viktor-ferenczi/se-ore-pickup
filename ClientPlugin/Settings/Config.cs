@@ -1,4 +1,5 @@
 using ClientPlugin.Settings.Elements;
+using VRage.Input;
 
 
 namespace ClientPlugin.Settings
@@ -19,5 +20,8 @@ namespace ClientPlugin.Settings
         
         [Checkbox("Collect stone")]
         public bool CollectStone { get; set; } = true;
+
+        [Keybind("This is a test keybind")]
+        public MyKeys ActivateKey { get; set; } = MyKeys.None;
     }
 }

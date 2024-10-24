@@ -491,6 +491,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Settings\Elements\Element.cs" />
+    <Compile Include="Settings\Elements\Keybind.cs" />
     <Compile Include="Settings\Generator.cs" />
     <Compile Include="Settings\Layouts\Layout.cs" />
     <Compile Include="Settings\Layouts\None.cs" />
