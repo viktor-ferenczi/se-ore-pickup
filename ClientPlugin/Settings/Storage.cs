@@ -8,8 +8,8 @@ namespace ClientPlugin.Settings
 {
     public static class Storage
     {
-        private static readonly string ConfigFileName = string.Concat(Plugin.Name, ".ini");
-        private static string ConfigFilePath => Path.Combine(MyFileSystem.UserDataPath, ConfigFileName);
+        private static readonly string ConfigFileName = string.Concat(Plugin.Name, ".cfg");
+        private static string ConfigFilePath => Path.Combine(MyFileSystem.UserDataPath, "Storage", ConfigFileName);
 
         public static void Save(Config config)
         {
