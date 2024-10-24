@@ -102,6 +102,8 @@ namespace ClientPlugin.Settings.Layouts
                     {
                         element.OriginAlign = MyGuiDrawAlignEnum.HORISONTAL_CENTER_AND_VERTICAL_CENTER;
                     }
+
+                    element.SetMaxWidth(ScrollPanel.ScrolledAreaSize.X / row.Count);
                 }
             }
         }
