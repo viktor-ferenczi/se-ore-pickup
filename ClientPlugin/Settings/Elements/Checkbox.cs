@@ -21,7 +21,6 @@ namespace ClientPlugin.Settings.Elements
                 new MyGuiControlLabel(text: name),
                 new MyGuiControlCheckbox(toolTip: Description)
                 {
-                    Size = new Vector2(0.5f, 0.5f),
                     IsChecked = (bool)propertyGetter(),
                     IsCheckedChanged = (x) => propertySetter(x.IsChecked),
                 }
