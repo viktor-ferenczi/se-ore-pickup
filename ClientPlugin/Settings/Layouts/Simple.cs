@@ -1,6 +1,7 @@
 ﻿using Sandbox.Graphics.GUI;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using VRage.Utils;
 using VRageMath;
 
@@ -12,15 +13,7 @@ namespace ClientPlugin.Settings.Layouts
         private MyGuiControlScrollablePanel ScrollPanel;
 
         public override Vector2 ScreenSize => new Vector2(0.4f, 0.7f);
-
-        private const float ElementHeight = 0.03f;
-        private const float ElementPadding = 0.015f;
-
-        private static float GetIndexOffset(int index)
-        {
-            return index * (ElementHeight + ElementPadding);
-        }
-
+        private const float ElementPadding = 0.01f;
         private static float Subdivide(int index, int total, float length)
         {
             return length / (total - 1) * index;
@@ -69,7 +62,21 @@ namespace ClientPlugin.Settings.Layouts
             for (int rowIndex = 0; rowIndex < controls.Count; rowIndex++)
             {
                 var row = controls[rowIndex];
-                float rowY = -0.5f * ScrollPanel.Size.Y + GetIndexOffset(rowIndex);
+                float rowHeight = row.Max(x => x.Size.Y);
+
+                float rowY;
+                if (rowIndex == 0)
+                {
+                    rowY = -0.5f * ScrollPanel.Size.Y + 0.5f * rowHeight;
+                }
+                else
+                {
+                    var oldRow = controls[rowIndex - 1];
+                    float oldRowY = oldRow.First().PositionY;
+                    float oldRowHeight = oldRow.Max(x => x.Size.Y);
+                    float oldRowEnd = oldRowY + 0.5f * oldRowHeight;
+                    rowY = oldRowEnd + ElementPadding + 0.5f * rowHeight;
+                }
 
                 for (int elementIndex = 0; elementIndex < row.Count; elementIndex++)
                 {
@@ -85,15 +92,15 @@ namespace ClientPlugin.Settings.Layouts
 
                     if (elementIndex == 0)
                     {
-                        element.OriginAlign = MyGuiDrawAlignEnum.HORISONTAL_LEFT_AND_VERTICAL_TOP;
+                        element.OriginAlign = MyGuiDrawAlignEnum.HORISONTAL_LEFT_AND_VERTICAL_CENTER;
                     }
                     else if (elementIndex == row.Count - 1)
                     {
-                        element.OriginAlign = MyGuiDrawAlignEnum.HORISONTAL_RIGHT_AND_VERTICAL_TOP;
+                        element.OriginAlign = MyGuiDrawAlignEnum.HORISONTAL_RIGHT_AND_VERTICAL_CENTER;
                     }
                     else
                     {
-                        element.OriginAlign = MyGuiDrawAlignEnum.HORISONTAL_CENTER_AND_VERTICAL_TOP;
+                        element.OriginAlign = MyGuiDrawAlignEnum.HORISONTAL_CENTER_AND_VERTICAL_CENTER;
                     }
                 }
             }
