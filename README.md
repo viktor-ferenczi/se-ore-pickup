@@ -23,7 +23,10 @@ Picks up ore extracted by the hand drill.
 
 Configure the ice and stone pickup via the plugin's settings.
 
-You may also use chat commands:
+You can open the plugin settings by pressing `Ctrl-Alt-/` in-game.
+(It does not work in menus.) 
+
+You may also use chat commands, should that be quicker to type for you:
 ```
 /pickup help    Prints this help on usage
 /pickup info    Prints the current settings
@@ -33,7 +36,7 @@ You may also use chat commands:
 /pickup stone   Toggles picking up stone
 ```
 
-Shortcuts:
+Shortcuts for the above parameters:
 ```
 help    h
 info    ?
