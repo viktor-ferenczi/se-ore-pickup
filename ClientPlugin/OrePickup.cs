@@ -9,6 +9,7 @@ using VRage.Game.Entity.UseObject;
 using VRage.Game.ModAPI;
 using VRage.ModAPI;
 using VRageMath;
+using ClientPlugin.Settings;
 
 namespace ClientPlugin
 {
@@ -16,14 +17,8 @@ namespace ClientPlugin
     {
         private const float CollectionRange = 2.5f;
 
-        public static OrePickupConfig Config = new OrePickupConfig();
         public static bool HasDetectedIncompatibleMod;
         public static string IncompatibleModName;
-
-        public static void Init()
-        {
-            Config = OrePickupConfig.Load();
-        }
 
         public static void OnSessionLoading()
         {
@@ -61,7 +56,7 @@ namespace ClientPlugin
 
         public static void CollectOre()
         {
-            if (!Config.Enabled ||
+            if (!Config.Current.Enabled ||
                 HasDetectedIncompatibleMod ||
                 MySession.Static == null ||
                 MySession.Static.IsUnloading)
@@ -92,12 +87,12 @@ namespace ClientPlugin
                 switch (subtypeName)
                 {
                     case "Ice":
-                        if (!Config.CollectIce)
+                        if (!Config.Current.CollectIce)
                             continue;
                         break;
 
                     case "Stone":
-                        if (!Config.CollectStone)
+                        if (!Config.Current.CollectStone)
                             continue;
                         break;
                 }

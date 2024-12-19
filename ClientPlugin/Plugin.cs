@@ -1,11 +1,10 @@
-﻿using System;
-using System.Reflection;
-using System.Text;
-using ClientPlugin.GUI;
+﻿using ClientPlugin.Settings;
+using ClientPlugin.Settings.Layouts;
 using HarmonyLib;
 using Sandbox.Game.World;
 using Sandbox.Graphics.GUI;
-using Sandbox.ModAPI;
+using System.Reflection;
+using System.Text;
 using VRage.Plugins;
 using VRageMath;
 
@@ -17,14 +16,14 @@ namespace ClientPlugin
         public const string Name = "OrePickup";
         public static Plugin Instance { get; private set; }
         public static int frameCounter;
+        private Generator ConfigGenerator;
 
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
         public void Init(object gameInstance)
         {
             Instance = this;
+            Instance.ConfigGenerator = new Generator();
             
-            OrePickup.Init();
-
             // TODO: Put your one time initialization code here.
             Harmony harmony = new Harmony(Name);
             harmony.PatchAll(Assembly.GetExecutingAssembly());
@@ -45,23 +44,12 @@ namespace ClientPlugin
 
         private void OnSessionLoading()
         {
-            RegisterChatCommand();
             OrePickup.OnSessionLoading();
         }
 
         private void OnSessionUnloading()
         {
             OrePickup.OnSessionUnloading();
-        }
-
-        private static void RegisterChatCommand()
-        {
-            var chatCommands = MySession.Static.ChatSystem.CommandSystem.ChatCommands;
-            var handler = new OrePickupChatCommand();
-            if (!chatCommands.ContainsKey(handler.CommandText))
-            {
-                chatCommands.Add(handler.CommandText, handler);
-            }
         }
 
         public void Update()
@@ -84,13 +72,8 @@ namespace ClientPlugin
                 return;
             }
 
-            MyGuiSandbox.AddScreen(new PluginConfigDialog());
+            Instance.ConfigGenerator.SetLayout<Simple>();
+            MyGuiSandbox.AddScreen(Instance.ConfigGenerator.Dialog);
         }
-
-        //TODO: Uncomment and use this method to load asset files
-        /*public void LoadAssets(string folder)
-        {
-
-        }*/
     }
 }
