@@ -501,7 +501,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="deploy.bat" />
-    <Content Include="PluginHub.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
