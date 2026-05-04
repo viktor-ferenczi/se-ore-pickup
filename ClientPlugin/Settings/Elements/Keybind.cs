@@ -73,8 +73,8 @@ namespace ClientPlugin.Settings.Elements
             if (userData.Device == MyGuiInputDeviceEnum.Mouse)
                 messageText = MyCommonTexts.AssignControlMouse;
 
-            // KEEN!!! MyGuiScreenOptionsControls.MyGuiControlAssignKeyMessageBox is PRIVATE!
-            var screenClass = typeof(MyGuiScreenOptionsControls).GetNestedType(
+            // KEEN!!! MyGuiScreenOptionsMouseKeyboard.MyGuiControlAssignKeyMessageBox is PRIVATE!
+            var screenClass = typeof(MyGuiScreenOptionsMouseKeyboard).GetNestedType(
                 "MyGuiControlAssignKeyMessageBox",
                 BindingFlags.NonPublic);
 
