@@ -55,3 +55,11 @@ Do not use this plugin together with this mod, because it has similar functional
 - [Automatic Ore Pickup](https://steamcommunity.com/sharedfiles/filedetails/?id=657749341)
 
 The plugin disables itself if a conflicting mod is detected in the current world.
+
+## Development
+
+Load the working copy through a Pulsar development folder: start Pulsar with `-sources`,
+then add this repository with the Sources button. Building `OrePickup.sln` deploys the
+plugin into Pulsar's `Local` folder only if `Pulsar` is set in `Directory.Build.props.user`
+or passed as `-p:Pulsar=...`. If the build cannot find the game, run `setup.py` to write its
+folder into `Directory.Build.props.user`.
